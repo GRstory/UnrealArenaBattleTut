@@ -3,6 +3,7 @@
 
 #include "GA/AT/ABAT_JumpAndWaitForLanding.h"
 #include "GameFramework/Character.h"
+#include "ABAT_Trace.h"
 
 UABAT_JumpAndWaitForLanding::UABAT_JumpAndWaitForLanding()
 {

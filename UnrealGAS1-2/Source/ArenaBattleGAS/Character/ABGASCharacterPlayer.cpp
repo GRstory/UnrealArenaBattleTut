@@ -32,8 +32,14 @@ void AABGASCharacterPlayer::PossessedBy(AController* NewController)
 		ASC = GASPS->GetAbilitySystemComponent();
 		ASC->InitAbilityActorInfo(GASPS, this);
 
-		int32 InputId = 0;
 		for (const auto& StartAbility : StartAbilities)
+		{
+			FGameplayAbilitySpec StartSpec(StartAbility);
+			ASC->GiveAbility(StartSpec);
+		}
+
+		int32 InputId = 0;
+		for (const auto& StartAbility : StartInputAbilities)
 		{
 			FGameplayAbilitySpec StartSpec(StartAbility);
 			StartSpec.InputID = InputId++;

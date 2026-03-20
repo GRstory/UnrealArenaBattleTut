@@ -33,5 +33,8 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = GAS)
 	TArray<TSubclassOf<class UGameplayAbility>> StartAbilities;
+
+	UPROPERTY(EditAnywhere, Category = GAS)
+	TArray<TSubclassOf<class UGameplayAbility>> StartInputAbilities;
 	
 };
