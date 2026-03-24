@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AttributeSet.h"
+#include "AbilitySystemComponent.h"
 #include "ABCharacterAttributeSet.generated.h"
 
 #define ATTRIBUTE_ACCESSORS(ClassName, PropertyName) \
@@ -22,6 +23,18 @@ class ARENABATTLEGAS_API UABCharacterAttributeSet : public UAttributeSet
 	
 public:
 	UABCharacterAttributeSet();
+	
+	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
+	virtual void PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue) override;
+
+	ATTRIBUTE_ACCESSORS(UABCharacterAttributeSet, MaxAttackRange);
+	ATTRIBUTE_ACCESSORS(UABCharacterAttributeSet, AttackRange);
+	ATTRIBUTE_ACCESSORS(UABCharacterAttributeSet, MaxAttackRadius);
+	ATTRIBUTE_ACCESSORS(UABCharacterAttributeSet, AttackRadius);
+	ATTRIBUTE_ACCESSORS(UABCharacterAttributeSet, MaxAttackRate);
+	ATTRIBUTE_ACCESSORS(UABCharacterAttributeSet, AttackRate);
+	ATTRIBUTE_ACCESSORS(UABCharacterAttributeSet, MaxHealth);
+	ATTRIBUTE_ACCESSORS(UABCharacterAttributeSet, Health);
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Attribute", meta = (AllowPrivateAccess = true))

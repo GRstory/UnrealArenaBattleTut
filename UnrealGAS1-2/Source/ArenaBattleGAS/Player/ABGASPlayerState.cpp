@@ -3,11 +3,12 @@
 
 #include "Player/ABGASPlayerState.h"
 #include "AbilitySystemComponent.h"
-#include "GameplayAbilitySpec.h"
+#include "Attribute/ABCharacterAttributeSet.h"
 
 AABGASPlayerState::AABGASPlayerState()
 {
 	ASC = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("ASC"));
+	AttributeSet = CreateDefaultSubobject<UABCharacterAttributeSet>(TEXT("AttributeSet"));
 	//ASC->SetIsReplicated(true);
 }
 

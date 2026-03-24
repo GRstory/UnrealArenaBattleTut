@@ -3,10 +3,13 @@
 
 #include "Character/ABGASCharacterNonPlayer.h"
 #include "AbilitySystemComponent.h"
+#include "Attribute/ABCharacterAttributeSet.h"
 
 AABGASCharacterNonPlayer::AABGASCharacterNonPlayer()
 {
 	ASC = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
+	AttributeSet = CreateDefaultSubobject<UABCharacterAttributeSet>(TEXT("AttributeSet"));
+
 }
 
 void AABGASCharacterNonPlayer::PossessedBy(AController* NewController)
@@ -18,5 +21,5 @@ void AABGASCharacterNonPlayer::PossessedBy(AController* NewController)
 
 UAbilitySystemComponent* AABGASCharacterNonPlayer::GetAbilitySystemComponent() const
 {
-	return nullptr;
+	return ASC;
 }
