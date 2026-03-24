@@ -21,7 +21,7 @@ public:
 	UABAT_Trace();
 
 	UFUNCTION(BlueprintCallable, Category = "Ability/Tasks", meta = (DisplayName = "Wait for Trace", HidePin = "OwningAbility", HidePin = "OwningAbility", DefaultToSelf = "OwningAbility", BlueprintInternalUseOnly = "TRUE"))
-	static UABAT_Trace* CreateTask(UGameplayAbility* OwningAbility, TSubclassOf<class AABAT_Trace> TargetActorClass);
+	static UABAT_Trace* CreateTask(UGameplayAbility* OwningAbility, TSubclassOf<class AABTA_Trace> TargetActorClass);
 
 public:
 	virtual void Activate() override;
@@ -39,7 +39,7 @@ protected:
 
 protected: //생성 정보 저장
 	UPROPERTY()
-	TSubclassOf<class AABAT_Trace> TargetActorClass;
+	TSubclassOf<class AABTA_Trace> TargetActorClass;
 	UPROPERTY()
-	TObjectPtr<AABAT_Trace> SpawnedTargetActor;
+	TObjectPtr<class AABTA_Trace> SpawnedTargetActor;
 };

@@ -49,7 +49,7 @@ void AABGASCharacterPlayer::PossessedBy(AController* NewController)
 		}
 
 		APlayerController* PlayerController = CastChecked<APlayerController>(NewController);
-		PlayerController->ConsoleCommand(TEXT("showdebug abilitysystem"));
+		PlayerController->ConsoleCommand(TEXT("show debug abilitysystem"));
 	}
 }
 

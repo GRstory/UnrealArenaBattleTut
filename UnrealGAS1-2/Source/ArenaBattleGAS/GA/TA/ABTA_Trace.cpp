@@ -21,8 +21,6 @@ void AABTA_Trace::StartTargeting(UGameplayAbility* Ability)
 
 void AABTA_Trace::ConfirmTargetingAndContinue()
 {
-	Super::ConfirmTargetingAndContinue();
-
 	if (SourceActor)
 	{
 		FGameplayAbilityTargetDataHandle DataHandle = MakeTargetData();
@@ -49,7 +47,7 @@ FGameplayAbilityTargetDataHandle AABTA_Trace::MakeTargetData() const
 	FGameplayAbilityTargetDataHandle DataHandle;
 	if (bHitDetected)
 	{
-		FGameplayAbilityTargetData_SingleTargetHit* TargetData = new FGameplayAbilityTargetData_SingleTargetHit();
+		FGameplayAbilityTargetData_SingleTargetHit* TargetData = new FGameplayAbilityTargetData_SingleTargetHit(HitResult);
 		DataHandle.Add(TargetData);
 	}
 
@@ -57,10 +55,12 @@ FGameplayAbilityTargetDataHandle AABTA_Trace::MakeTargetData() const
 	if (bShowDebug)
 	{
 		FVector CapsuleOrigin = Start + (End - Start) * 0.5f;
-		float CapsuleHalfHeight = AttackRadius * 0.5f;
+		float CapsuleHalfHeight = AttackRange * 0.5f;
 
-		FColor Color = bHitDetected ? FColor::Red : FColor::Green;
-		DrawDebugCapsule(GetWorld(), CapsuleOrigin, CapsuleHalfHeight, AttackRadius, FRotationMatrix::MakeFromZ(Forward).ToQuat(), Color, false, 2.0f);
+		FColor Color = bHitDetected ? FColor::Green : FColor::Red;
+		DrawDebugCapsule(GetWorld(), CapsuleOrigin, CapsuleHalfHeight, AttackRadius, FRotationMatrix::MakeFromZ(Forward).ToQuat(), Color, false, 5.0f);
 	}
 #endif
+
+	return DataHandle;
 }
