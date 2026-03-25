@@ -24,7 +24,12 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "GAS")
 	TObjectPtr<class UAbilitySystemComponent> ASC;
 
-	UPROPERTY(EditAnywhere, Category = "Attribute")
+	UPROPERTY(EditAnywhere, Category = "GAS")
 	TObjectPtr<class UAttributeSet> AttributeSet;
 
+	UPROPERTY(EditAnywhere, Category = "GAS")
+	TSubclassOf<class UGameplayEffect> InitStatEffect;
+
+	UPROPERTY(EditAnywhere, Category = "GAS")
+	float Level;
 };

@@ -25,4 +25,7 @@ protected:
 protected:
 	UPROPERTY(EditAnywhere, Category = "GAS")
 	FGameplayTag TriggerGameplayTag;
+
+	UPROPERTY(EditAnywhere, Category = "GAS")
+	float ComboAttackLevel;
 };

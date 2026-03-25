@@ -23,4 +23,8 @@ protected:
 	UFUNCTION()
 	void OnTraceResultCallback(const FGameplayAbilityTargetDataHandle& DataHandle);
 	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GAS")
+	TSubclassOf<class UGameplayEffect> AttackDamageEffect;
+
+	float CurrentComboLevel = 1.0;
 };

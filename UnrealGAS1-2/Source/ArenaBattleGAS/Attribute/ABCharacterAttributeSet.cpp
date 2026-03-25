@@ -2,20 +2,46 @@
 
 
 #include "Attribute/ABCharacterAttributeSet.h"
+#include "GameplayEffectExtension.h"
+#include "ArenaBattleGAS.h"
 
-UABCharacterAttributeSet::UABCharacterAttributeSet() : AttackRange(100.0f), AttackRadius(50.f), AttackRate(30.f), MaxAttackRange(300.f), MaxAttackRadius(150.f), MaxAttackRate(100.f), MaxHealth(100.f)
+UABCharacterAttributeSet::UABCharacterAttributeSet() : AttackRange(100.0f), AttackRadius(50.f), AttackRate(30.f), MaxAttackRange(300.f), MaxAttackRadius(150.f), MaxAttackRate(100.f), MaxHealth(100.f), Damage(0.f)
 {
 	InitHealth(GetMaxHealth());
 }
 
 void UABCharacterAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
 {
-	if (Attribute == GetHealthAttribute())
+	/*if (Attribute == GetHealthAttribute())
 	{
 		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
+	}*/
+
+	if(Attribute == GetDamageAttribute())
+	{
+		NewValue = FMath::Clamp(NewValue, 0.f, NewValue);
 	}
 }
 
-void UABCharacterAttributeSet::PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue)
+bool UABCharacterAttributeSet::PreGameplayEffectExecute(FGameplayEffectModCallbackData& Data)
 {
+	return true;
+}
+
+void UABCharacterAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
+{
+	Super::PostGameplayEffectExecute(Data);
+
+	float MinimumHealth = 0.f;
+	if (Data.EvaluatedData.Attribute == GetHealthAttribute())
+	{
+		ABGAS_LOG(LogABGAS, Warning, TEXT("Direct Health Attribute Execute, %f"), GetHealth());
+		SetHealth(FMath::Clamp(GetHealth(), MinimumHealth, GetMaxHealth()));
+	}
+	else if(Data.EvaluatedData.Attribute == GetDamageAttribute())
+	{
+		ABGAS_LOG(LogABGAS, Log, TEXT("Damage, %f"), GetDamage());
+		SetHealth(FMath::Clamp(GetHealth() - GetDamage(), MinimumHealth, GetMaxHealth()));
+		SetDamage(0.f);
+	}
 }
