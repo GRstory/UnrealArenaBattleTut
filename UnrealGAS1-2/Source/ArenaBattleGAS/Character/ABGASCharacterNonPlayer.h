@@ -21,15 +21,22 @@ public:
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
 protected:
+	UFUNCTION()
+	void OnOutOfHealth();
+
+protected:
 	UPROPERTY(EditAnywhere, Category = "GAS")
 	TObjectPtr<class UAbilitySystemComponent> ASC;
 
 	UPROPERTY(EditAnywhere, Category = "GAS")
-	TObjectPtr<class UAttributeSet> AttributeSet;
+	TObjectPtr<class UABCharacterAttributeSet> AttributeSet;
 
 	UPROPERTY(EditAnywhere, Category = "GAS")
 	TSubclassOf<class UGameplayEffect> InitStatEffect;
 
 	UPROPERTY(EditAnywhere, Category = "GAS")
 	float Level;
+
+	UPROPERTY(EditAnywhere, Category = UI)
+	TObjectPtr<class UABGASWidgetComponent> HpBarWidget;
 };

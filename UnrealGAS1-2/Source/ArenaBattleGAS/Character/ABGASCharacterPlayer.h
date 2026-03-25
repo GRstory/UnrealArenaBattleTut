@@ -26,6 +26,9 @@ protected:
 	void GASInputPressed(int32 InputId);
 	void GASInputReleased(int32 InputId);
 
+	UFUNCTION()
+	void OnOutOfHealth();
+
 
 protected:
 	UPROPERTY(EditAnywhere, Category = "GAS")
@@ -36,5 +39,8 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = GAS)
 	TArray<TSubclassOf<class UGameplayAbility>> StartInputAbilities;
+
+	UPROPERTY(EditAnywhere, Category = UI)
+	TObjectPtr<class UABGASWidgetComponent> HpBarWidget;
 	
 };

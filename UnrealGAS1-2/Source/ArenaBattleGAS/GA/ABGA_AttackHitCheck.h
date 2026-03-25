@@ -25,6 +25,9 @@ protected:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GAS")
 	TSubclassOf<class UGameplayEffect> AttackDamageEffect;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GAS")
+	TSubclassOf<class UGameplayEffect> AttackBuffEffect;
 
 	float CurrentComboLevel = 1.0;
 };

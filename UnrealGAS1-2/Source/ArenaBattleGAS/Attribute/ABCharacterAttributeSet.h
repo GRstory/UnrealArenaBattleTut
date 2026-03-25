@@ -13,6 +13,8 @@
 	GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnOutOfHealthDelegate);
+
 /**
  * 
  */
@@ -28,6 +30,7 @@ public:
 	virtual bool PreGameplayEffectExecute(struct FGameplayEffectModCallbackData& Data) override;
 	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
 
+	mutable FOnOutOfHealthDelegate OnOutOfHealth;
 
 	ATTRIBUTE_ACCESSORS(UABCharacterAttributeSet, MaxAttackRange);
 	ATTRIBUTE_ACCESSORS(UABCharacterAttributeSet, AttackRange);
@@ -62,6 +65,9 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "Attribute", meta = (AllowPrivateAccess = true))
 	FGameplayAttributeData Damage;
+
+	bool bOutOfHealth = false;
+
 
 	friend class UABGE_AttackDamage;
 };
