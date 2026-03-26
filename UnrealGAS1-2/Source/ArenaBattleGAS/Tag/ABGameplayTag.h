@@ -8,3 +8,5 @@
 #define ABTAG_CHARACTER_DEAD FGameplayTag::RequestGameplayTag(FName("Character.State.IsDead"))
 #define ABTAG_CHARACTER_INVINCIBLE FGameplayTag::RequestGameplayTag(FName("Character.State.Invincible"))
 #define ABTAG_DATA_DAMAGE FGameplayTag::RequestGameplayTag(FName("Data.Damage"))
+
+#define GAMEPLAYCUE_CHARACTER_ATTACKHIT FGameplayTag::RequestGameplayTag(FName("GameplayCue.Character.AttackHit"))

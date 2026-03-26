@@ -36,12 +36,26 @@ void UABGA_AttackHitCheck::OnTraceResultCallback(const FGameplayAbilityTargetDat
 			ABGAS_LOG(LogABGAS, Log, TEXT("Hit Actor: %s"), *HitResult.GetActor()->GetName());
 
 			UAbilitySystemComponent* SourceASC = GetAbilitySystemComponentFromActorInfo_Checked();
+			UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(HitResult.GetActor());
+			if(!SourceASC || !TargetASC)
+			{
+				ABGAS_LOG(LogABGAS, Warning, TEXT("Source or Target ASC is null"));
+				return;
+			}
+
 			const UABCharacterAttributeSet* SourceAttributeSet = SourceASC->GetSet<UABCharacterAttributeSet>();
 
 			FGameplayEffectSpecHandle EffectSpecHandle = MakeOutgoingGameplayEffectSpec(AttackDamageEffect, CurrentComboLevel);
 			if(EffectSpecHandle.IsValid())
 			{
 				ApplyGameplayEffectSpecToTarget(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, EffectSpecHandle, DataHandle);
+
+				FGameplayEffectContextHandle CueContextHandle = UAbilitySystemBlueprintLibrary::GetEffectContext(EffectSpecHandle);
+				CueContextHandle.AddHitResult(HitResult);
+				FGameplayCueParameters CueParameters;
+				CueParameters.EffectContext = CueContextHandle;
+
+				TargetASC->ExecuteGameplayCue(GAMEPLAYCUE_CHARACTER_ATTACKHIT, CueContextHandle);
 			}
 
 			FGameplayEffectSpecHandle BuffEffectSpecHandle = MakeOutgoingGameplayEffectSpec(AttackBuffEffect);
